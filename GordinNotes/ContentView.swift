@@ -30,10 +30,12 @@ struct ContentView: View {
                     }
                 }
             }
-            
-        }
-        .onAppear() {
-            noteApp.fetchData()
+            .onAppear() {
+                noteApp.fetchData()
+            }
+            .refreshable {
+                noteApp.fetchData()
+            }
         }
     }
 }

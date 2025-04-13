@@ -23,6 +23,8 @@ struct NoteDetail: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     noteApp.saveData(note: note)
+                    note.title = ""
+                    note.notesdata = ""
                 } label: {
                     Text("Save")
                 }

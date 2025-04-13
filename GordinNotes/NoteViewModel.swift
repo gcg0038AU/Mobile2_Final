@@ -29,28 +29,32 @@ class NoteViewModel : ObservableObject {
         }
     }
     func saveData(note : NoteModel) {
-        if let id = note.id {
-            let docRef = db.collection("notes").document(id)
-            docRef.updateData([
-                "title" : note.title,
-                "notesdata" : note.notesdata
-            ]) {err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
+        if let id = note.id { //edit existing note
+            if !note.title.isEmpty || !note.notesdata.isEmpty {
+                let docRef = db.collection("notes").document(id)
+                docRef.updateData([
+                    "title" : note.title,
+                    "notesdata" : note.notesdata
+                ]) {err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("Document successfully updated")
+                    }
                 }
             }
-        } else {
-            var ref: DocumentReference? = nil
-            ref = db.collection("notes").addDocument(data: [
-                "title" : note.title,
-                "notesdata" : note.notesdata
-            ]) {err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document successfully added")
+        } else { //add new note
+            if !note.title.isEmpty || !note.notesdata.isEmpty {
+                var ref: DocumentReference? = nil
+                ref = db.collection("notes").addDocument(data: [
+                    "title" : note.title,
+                    "notesdata" : note.notesdata
+                ]) {err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document successfully added")
+                    }
                 }
             }
         }
