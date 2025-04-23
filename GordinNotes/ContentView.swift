@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var noteApp = NoteViewModel()
-    @State var note = NoteModel(Note_title: "", Note_Content: "", User_ID: "")
+    @State var note = NoteModel(Note_Title: "", Note_Content: "", User_ID: "", Note_Color : "")
     var body: some View {
         NavigationStack {
             List {
@@ -17,7 +17,7 @@ struct ContentView: View {
                     NavigationLink {
                         NoteDetail(note: $note)
                     } label: {
-                        Text(note.Note_title)
+                        Text(note.Note_Title)
                     }
                 }
                 Section {

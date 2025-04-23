@@ -20,7 +20,6 @@ struct SettingsView: View {
                     Text("Notes")
                         .foregroundColor(Color.blue)
                 }
-                .navigationTitle("User Menu")
                 Button {
                     Task {
                         do {
@@ -35,11 +34,12 @@ struct SettingsView: View {
                     Text("Sign Out")
                         .foregroundColor(Color.blue)
                 }
+                .navigationTitle("User Menu")
             }
         }
     }
 }
 
 #Preview {
-    SettingsView(showSignIn: .constant(false))
+    SettingsView(showSignIn: .constant(false) )
 }

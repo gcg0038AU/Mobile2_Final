@@ -15,7 +15,7 @@ class NoteViewModel : ObservableObject {
         self.notes.removeAll()
         do {
             let currentUID = try Authentication.shared.getUser().uid
-            db.collection("UserNotes").whereField("User_ID", isEqualTo: currentUID).getDocuments() { (QuerySnapshot, err) in
+            db.collection("UserNotesColor").whereField("User_ID", isEqualTo: currentUID).getDocuments() { (QuerySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -38,13 +38,14 @@ class NoteViewModel : ObservableObject {
     }
     func saveData(note : NoteModel) {
         if let id = note.id { //edit existing note
-            if !note.Note_title.isEmpty || !note.Note_Content.isEmpty {
-                let docRef = db.collection("UserNotes").document(id)
+            if !note.Note_Title.isEmpty || !note.Note_Content.isEmpty {
+                let docRef = db.collection("UserNotesColor").document(id)
                 do {
                     let currentUID = try Authentication.shared.getUser().uid
                     docRef.updateData([
-                        "Note_title" : note.Note_title,
+                        "Note_Title" : note.Note_Title,
                         "Note_Content" : note.Note_Content,
+                        "Note_Color" : note.Note_Color,
                         "User_ID" : currentUID
                     ]) {err in
                         if let err = err {
@@ -59,13 +60,14 @@ class NoteViewModel : ObservableObject {
                 }
             }
         } else { //add new note
-            if !note.Note_title.isEmpty || !note.Note_Content.isEmpty {
+            if !note.Note_Title.isEmpty || !note.Note_Content.isEmpty {
                 var ref: DocumentReference? = nil
                 do {
                     let currentUID = try Authentication.shared.getUser().uid
-                    ref = db.collection("UserNotes").addDocument(data: [
-                        "Note_title" : note.Note_title,
+                    ref = db.collection("UserNotesColor").addDocument(data: [
+                        "Note_Title" : note.Note_Title,
                         "Note_Content" : note.Note_Content,
+                        "Note_Color" : note.Note_Color,
                         "User_ID" : currentUID
                     ]) {err in
                         if let err = err {
