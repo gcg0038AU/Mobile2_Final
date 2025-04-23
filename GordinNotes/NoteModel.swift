@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 struct NoteModel : Codable, Identifiable {
     @DocumentID var id : String?
-    var title : String
-    var notesdata : String
+    var Note_title : String
+    var Note_Content : String
+    var User_ID : String
 }

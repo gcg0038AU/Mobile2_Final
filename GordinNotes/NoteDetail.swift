@@ -12,10 +12,10 @@ struct NoteDetail: View {
     @StateObject var noteApp = NoteViewModel()
     var body: some View {
         VStack(alignment: .leading) {
-            TextField("Note Title", text: $note.title)
+            TextField("Note Title", text: $note.Note_title)
                 .font(.system(size: 25))
                 .fontWeight(.bold)
-            TextEditor(text: $note.notesdata)
+            TextEditor(text: $note.Note_Content)
                 .font(.system(size: 25))
         }
         .padding()
@@ -23,8 +23,8 @@ struct NoteDetail: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     noteApp.saveData(note: note)
-                    note.title = ""
-                    note.notesdata = ""
+                    note.Note_title = ""
+                    note.Note_Content = ""
                 } label: {
                     Text("Save")
                 }
